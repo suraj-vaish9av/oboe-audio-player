@@ -6,15 +6,16 @@
 #define OBOE_AUDIO_PLAYER_AASSETDATASOURCE_H
 
 #include "DataSource.h"
+#include <android/asset_manager.h>
 
 class AAssetDataSource : public DataSource{
 
 public:
-    int64_t getSize() const override {return mBufferSize();}
+    int64_t getSize() const override {return mBufferSize;}
     AudioProperties getProperties() const override { return mProperties; }
     const float* getData() const override { return mBuffer.get(); }
 
-    static AAssetDataSource* newFromCompressedAsset(AssetManager &assetManager,
+    static AAssetDataSource* newFromCompressedAsset(AAssetManager &assetManager,
             const char* filename,
             AudioProperties targetProperties);
 

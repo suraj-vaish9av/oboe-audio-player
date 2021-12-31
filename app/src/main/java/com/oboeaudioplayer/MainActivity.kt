@@ -1,6 +1,8 @@
 package com.oboeaudioplayer
 
+import android.content.res.AssetManager
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -9,6 +11,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         stringFromJNI()
+        findViewById<Button>(R.id.btnPlay).setOnClickListener {
+            startPlaying(assets,"sample.mp3");
+        }
+        findViewById<Button>(R.id.btnPause).setOnClickListener {
+            stopPlaying()
+        }
     }
 
     /**
@@ -16,6 +24,8 @@ class MainActivity : AppCompatActivity() {
      * which is packaged with this application.
      */
     external fun stringFromJNI(): String
+    external fun startPlaying(assetManager: AssetManager, fileName:String);
+    external fun stopPlaying();
 
     companion object {
         // Used to load the 'native-lib' library on application startup.
